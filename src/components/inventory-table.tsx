@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Pencil, Trash2, Search, Loader2 } from "lucide-react";
+import { Plus, Search, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,6 +21,12 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 import type { InventoryItem, InventoryFormData } from "@/lib/types";
 
 interface InventoryTableProps {
@@ -133,29 +139,28 @@ export function InventoryTable({
       </div>
 
       {/* Table */}
-      <div className="overflow-hidden rounded-xl border bg-card">
+      <div className="rounded-xl border bg-card">
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-right">שם</TableHead>
-              <TableHead className="text-right">מק&quot;ט</TableHead>
-              <TableHead className="text-right">כמות</TableHead>
-              <TableHead className="text-right">מיקום</TableHead>
-              <TableHead className="text-right">גודל</TableHead>
-              <TableHead className="w-20 text-right">פעולות</TableHead>
+              <TableHead className="px-2 py-1.5 text-right text-xs">שם</TableHead>
+              <TableHead className="px-2 py-1.5 text-right text-xs">מק&quot;ט</TableHead>
+              <TableHead className="px-2 py-1.5 text-right text-xs">כמות</TableHead>
+              <TableHead className="px-2 py-1.5 text-right text-xs">מיקום</TableHead>
+              <TableHead className="hidden px-2 py-1.5 text-right text-xs sm:table-cell">גודל</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {loading ? (
               <TableRow>
-                <TableCell colSpan={6} className="py-12 text-center">
+                <TableCell colSpan={5} className="py-12 text-center">
                   <Loader2 className="mx-auto h-6 w-6 animate-spin text-muted-foreground" />
                 </TableCell>
               </TableRow>
             ) : items.length === 0 ? (
               <TableRow>
                 <TableCell
-                  colSpan={6}
+                  colSpan={5}
                   className="py-12 text-center text-muted-foreground"
                 >
                   {filter ? "לא נמצאו תוצאות" : "אין פריטים במלאי"}
@@ -163,41 +168,50 @@ export function InventoryTable({
               </TableRow>
             ) : (
               items.map((item) => (
-                <TableRow key={item.id}>
-                  <TableCell className="font-medium">{item.name}</TableCell>
-                  <TableCell className="font-mono text-sm">{item.sku}</TableCell>
-                  <TableCell>{item.quantity}</TableCell>
-                  <TableCell>
-                    <span className="rounded-md bg-primary/10 px-2 py-0.5 text-xs font-bold text-primary">
-                      {item.location}
-                    </span>
-                  </TableCell>
-                  <TableCell className="text-sm text-muted-foreground">
-                    {item.size}
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-1">
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={() => openEdit(item)}
-                        aria-label="ערוך"
-                      >
-                        <Pencil className="h-3.5 w-3.5" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        className="h-8 w-8 text-destructive hover:text-destructive"
-                        onClick={() => openDelete(item.id)}
-                        aria-label="מחק"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
+                <ContextMenu key={item.id}>
+                  <ContextMenuTrigger render={<TableRow />}>
+                    <TableCell
+                      className="cursor-pointer whitespace-nowrap px-2 py-1.5 text-xs font-medium hover:text-primary"
+                      onClick={() => {
+                        navigator.clipboard.writeText(item.name);
+                        toast("הועתק!", { description: item.name });
+                      }}
+                    >
+                      {item.name}
+                    </TableCell>
+                    <TableCell
+                      className="cursor-pointer whitespace-nowrap px-2 py-1.5 font-mono text-xs hover:text-primary"
+                      onClick={() => {
+                        navigator.clipboard.writeText(item.sku);
+                        toast("הועתק!", { description: item.sku });
+                      }}
+                    >
+                      {item.sku}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap px-2 py-1.5 text-xs">
+                      {item.quantity}
+                    </TableCell>
+                    <TableCell className="whitespace-nowrap px-2 py-1.5 text-xs">
+                      <span className="rounded-md bg-primary/10 px-1.5 py-0.5 text-xs font-bold text-primary">
+                        {item.location}
+                      </span>
+                    </TableCell>
+                    <TableCell className="hidden whitespace-nowrap px-2 py-1.5 text-xs text-muted-foreground sm:table-cell">
+                      {item.size}
+                    </TableCell>
+                  </ContextMenuTrigger>
+                  <ContextMenuContent>
+                    <ContextMenuItem onSelect={() => openEdit(item)}>
+                      עריכה
+                    </ContextMenuItem>
+                    <ContextMenuItem
+                      onSelect={() => openDelete(item.id)}
+                      className="text-destructive focus:text-destructive"
+                    >
+                      מחיקה
+                    </ContextMenuItem>
+                  </ContextMenuContent>
+                </ContextMenu>
               ))
             )}
           </TableBody>

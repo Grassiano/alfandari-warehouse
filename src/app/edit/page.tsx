@@ -62,7 +62,7 @@ export default function EditPage() {
   return (
     <div className="min-h-dvh">
       <Header />
-      <main className="mx-auto max-w-4xl px-4 py-6">
+      <main className="mx-auto max-w-6xl px-4 py-6">
         <InventoryTable
           items={filtered}
           loading={loading}

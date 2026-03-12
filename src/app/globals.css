@@ -132,6 +132,21 @@
   body {
     @apply bg-background text-foreground;
   }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: url("https://alfandari.biz/wp-content/uploads/2024/04/פלטת-לאמי-אלון-e1769257512595-1024x1024.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  .dark body::before {
+    opacity: 0.03;
+  }
   html {
     @apply font-sans;
   }

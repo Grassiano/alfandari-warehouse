@@ -15,7 +15,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b bg-card/80 backdrop-blur-sm">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-        <div className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <Image
             src="https://alfandari.biz/wp-content/uploads/2026/01/idsite_w.png"
             alt="אלפנדרי"
@@ -29,7 +29,7 @@ export function Header() {
               מחסן פורמייקות · מחלקת הדבקות
             </p>
           </div>
-        </div>
+        </Link>
 
         <div className="flex items-center gap-1">
           <Link
