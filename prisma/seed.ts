@@ -34,7 +34,7 @@ const items = [
   { name: "פורמייקה 244", sku: "BRIGHT ALE", quantity: 140, location: "-", size: "244" },
   { name: "פורמייקה 244", sku: "7663A", quantity: 26, location: "-", size: "244" },
   { name: "פורמייקה 244", sku: "933LL", quantity: 7, location: "C8", size: "244" },
-  { name: "פורמייקה 305 גב", sku: "לא ברור", quantity: 470, location: "C8", size: "305" },
+  { name: "פורמייקה 305 גב", sku: "גב.", quantity: 470, location: "C8", size: "305" },
   { name: "פורמייקה 305", sku: "3100T", quantity: 310, location: "C6", size: "305" },
   { name: "פורמייקה 305", sku: "3199T", quantity: 150, location: "D4", size: "305" },
   { name: "פורמייקה 305", sku: "3130", quantity: 5, location: "C8", size: "305" },
@@ -83,7 +83,7 @@ const items = [
   { name: "פורמייקה 244", sku: "1067TF", quantity: 0, location: "-", size: "244" },
 
   // === Page 5: פורמייקה 244 items ===
-  { name: "פורמייקה 244 0.9 גב", sku: "לא ברור", quantity: 1600, location: "H4", size: "244" },
+  { name: "פורמייקה 244 0.9 גב", sku: "0.9 גב", quantity: 1600, location: "H4", size: "244" },
   { name: "פורמייקה 244", sku: "3199MAT", quantity: 450, location: "J8", size: "244" },
   { name: "פורמייקה 244", sku: "3100T", quantity: 2100, location: "L2", size: "244" },
   { name: "פורמייקה 244", sku: "1020G", quantity: 9, location: "A3", size: "244" },
@@ -125,7 +125,7 @@ const items = [
   { name: "פורמייקה 244", sku: "3102", quantity: 700, location: "לא ברור", size: "244" },
   { name: "פורמייקה 244", sku: "7020", quantity: 600, location: "F6", size: "244" },
   { name: "פורמייקה 244", sku: "3160", quantity: 1200, location: "F7", size: "244" },
-  { name: "פורמייקה 244 0.6 גב", sku: "לא ברור", quantity: 4000, location: "H4", size: "244" },
+  { name: "פורמייקה 244 0.6 גב", sku: "0.6 גב", quantity: 4000, location: "H4", size: "244" },
 
   // === Page 7: פורמייקה 244 + 305 items ===
   { name: "פורמייקה 244", sku: "2245TAP", quantity: 96, location: "I5", size: "244" },
